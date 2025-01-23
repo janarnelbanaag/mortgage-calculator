@@ -20,7 +20,8 @@ class LoanCalculatorController extends Controller
         $result = $this->calculatorService->generateAmortizationSchedule(
             $request->loan_amount,
             $request->annual_interest_rate,
-            $request->loan_term_years
+            $request->loan_term_years,
+            $request->extra_payments ?? []
         );
 
         foreach ($result['schedule'] as $entry) {
@@ -30,6 +31,7 @@ class LoanCalculatorController extends Controller
                 'monthly_payment' => $entry['monthly_payment'],
                 'principal_component' => $entry['principal_payment'],
                 'interest_component' => $entry['interest_payment'],
+                'extra_payment' => $entry['extra_payment'],
                 'ending_balance' => $entry['ending_balance']
             ]);
         }
