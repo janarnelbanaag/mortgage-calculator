@@ -14,9 +14,9 @@ class LoanCalculatorService
     }
 
     private function calculateEffectiveInterestRate(
-        float $principal,
-        float $totalInterest,
-        int $actualMonths
+        float $loanAmount, 
+        float $annualInterestRate, 
+        array $amortizationSchedule
     ): float {
         $remainingBalance = $loanAmount;
         $totalActualInterestPaid = 0;
@@ -97,7 +97,7 @@ class LoanCalculatorService
         $effectiveRate = $this->calculateEffectiveInterestRate(
             $loanAmount,
             $totalInterestPaid,
-            count($schedule)
+            $schedule
         );
         
         return [
